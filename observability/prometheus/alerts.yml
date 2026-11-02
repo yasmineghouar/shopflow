@@ -1,0 +1,66 @@
+# SLO ShopFlow : 99 % des requêtes métier (hors 429 volontaires) servies en 2xx en moins de 1 s.
+# Budget d'erreur : 1 %. Alertes multi-fenêtres sur le taux de consommation du budget (burn rate).
+groups:
+  - name: shopflow-slo-recording
+    rules:
+      - record: shopflow:sli:ratio_rate1m
+        expr: |
+          sum(rate(shopflow_http_request_duration_seconds_bucket{classe="2xx",le="1.0"}[1m]))
+          / sum(rate(shopflow_http_request_duration_seconds_count{classe!="429"}[1m]))
+      - record: shopflow:sli:ratio_rate5m
+        expr: |
+          sum(rate(shopflow_http_request_duration_seconds_bucket{classe="2xx",le="1.0"}[5m]))
+          / sum(rate(shopflow_http_request_duration_seconds_count{classe!="429"}[5m]))
+      - record: shopflow:sli:ratio_rate1h
+        expr: |
+          sum(rate(shopflow_http_request_duration_seconds_bucket{classe="2xx",le="1.0"}[1h]))
+          / sum(rate(shopflow_http_request_duration_seconds_count{classe!="429"}[1h]))
+      - record: shopflow:burn_rate:1m
+        expr: (1 - shopflow:sli:ratio_rate1m) / 0.01
+      - record: shopflow:burn_rate:5m
+        expr: (1 - shopflow:sli:ratio_rate5m) / 0.01
+      - record: shopflow:burn_rate:1h
+        expr: (1 - shopflow:sli:ratio_rate1h) / 0.01
+
+  - name: shopflow-slo-alerts
+    rules:
+      - alert: ShopFlowSLOBurnRateRapide
+        # Budget mensuel consommé 14,4x trop vite (2 % du budget en 1 h) : on réveille l'astreinte.
+        expr: shopflow:burn_rate:5m > 14.4 and shopflow:burn_rate:1m > 14.4
+        for: 1m
+        labels:
+          severity: page
+        annotations:
+          summary: "SLO ShopFlow en danger : burn rate {{ $value | printf \"%.1f\" }}x"
+          description: "Moins de 99 % des requêtes sont servies en 2xx sous 1 s (fenêtres 5 min et 1 min)."
+      - alert: ShopFlowSLOBurnRateLent
+        expr: shopflow:burn_rate:1h > 6 and shopflow:burn_rate:5m > 6
+        for: 5m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "Consommation lente mais durable du budget d'erreur ShopFlow"
+
+  - name: shopflow-patterns
+    rules:
+      - alert: ShopFlowCircuitOuvert
+        expr: max by (dep) (shopflow_circuit_state) == 1
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Circuit breaker ouvert vers {{ $labels.dep }} : réponses en mode dégradé"
+      - alert: ShopFlowInstanceIndisponible
+        expr: up{job="shopflow-api"} == 0
+        for: 15s
+        labels:
+          severity: warning
+        annotations:
+          summary: "Réplica API {{ $labels.instance }} injoignable"
+      - alert: ShopFlowDelestageEleve
+        expr: sum(rate(shopflow_load_shed_total[1m])) / sum(rate(shopflow_http_requests_total[1m])) > 0.05
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Plus de 5 % des requêtes délestées (503) : capacité insuffisante"

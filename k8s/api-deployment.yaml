@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopflow-api
+  namespace: shopflow
+  labels: {app: shopflow-api}
+spec:
+  replicas: 3
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0          # jamais moins de 3 pods prêts pendant un déploiement
+      maxSurge: 1
+  selector:
+    matchLabels: {app: shopflow-api}
+  template:
+    metadata:
+      labels: {app: shopflow-api}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: /metrics
+    spec:
+      terminationGracePeriodSeconds: 20      # > drain de 5 s + requêtes en cours
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+      topologySpreadConstraints:             # répartition sur les nœuds puis les zones
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels: {app: shopflow-api}
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels: {app: shopflow-api}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                topologyKey: kubernetes.io/hostname
+                labelSelector:
+                  matchLabels: {app: shopflow-api}
+      containers:
+        - name: api
+          image: shopflow-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8000}
+          envFrom:
+            - configMapRef: {name: shopflow-api-config}
+          resources:
+            requests: {cpu: 100m, memory: 64Mi}
+            limits: {cpu: 500m, memory: 256Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          startupProbe:                      # 3 s de démarrage simulé : jusqu'à 40 s tolérés
+            httpGet: {path: /health/startup, port: http}
+            periodSeconds: 2
+            timeoutSeconds: 1
+            failureThreshold: 20
+          readinessProbe:                    # local : démarrage terminé, pas d'arrêt en cours
+            httpGet: {path: /health/ready, port: http}
+            periodSeconds: 2
+            timeoutSeconds: 1
+            failureThreshold: 2
+          livenessProbe:                     # processus uniquement, jamais les dépendances
+            httpGet: {path: /health/live, port: http}
+            periodSeconds: 10
+            timeoutSeconds: 1
+            failureThreshold: 3

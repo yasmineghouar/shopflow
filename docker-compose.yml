@@ -1,0 +1,96 @@
+# ShopFlow — projet final « Architecture résiliente complète »
+# Lancer tout : docker compose up -d --build
+#   Gateway (API)  http://localhost:8000 (GATEWAY_PORT)     Grafana     http://localhost:3000
+#   Prometheus     http://localhost:9090      Admin pannes : ports 8081 (stock), 8082 (reco), 8083 (payment)
+# Mode « avant patterns » pour les expériences : PATTERNS=off docker compose up -d api
+
+x-dependance: &dependance
+  build: ./deps
+  image: shopflow-deps:latest
+  restart: unless-stopped
+  init: true
+  healthcheck:
+    test: ["CMD", "python", "-c", "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=1).status == 200 else 1)"]
+    interval: 5s
+    timeout: 2s
+    retries: 3
+    start_period: 5s
+
+services:
+  stock:
+    <<: *dependance
+    ports: ["8081:8080"]
+
+  reco:
+    <<: *dependance
+    ports: ["8082:8080"]
+
+  payment:
+    <<: *dependance
+    ports: ["8083:8080"]
+
+  api:
+    build: ./api
+    image: shopflow-api:latest
+    restart: unless-stopped
+    init: true                     # tini en PID 1 : relaie SIGTERM, permet un vrai kill -9 du processus
+    stop_grace_period: 15s         # > drain de 5 s
+    environment:
+      PATTERNS: ${PATTERNS:-on}
+      STOCK_URL: http://stock:8080
+      RECO_URL: http://reco:8080
+      PAYMENT_URL: http://payment:8080
+      DEADLINE_STOCK: ${DEADLINE_STOCK:-0.8}
+      TIMEOUT_STOCK: ${TIMEOUT_STOCK:-0.3}
+      LS_MAX_EN_COURS: ${LS_MAX_EN_COURS:-40}
+      CB_FENETRE: ${CB_FENETRE:-50}
+      CB_SEUIL: ${CB_SEUIL:-0.6}
+      CB_VOLUME_MIN: ${CB_VOLUME_MIN:-20}
+    depends_on:
+      stock: {condition: service_healthy}
+      reco: {condition: service_healthy}
+      payment: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=1).status == 200 else 1)"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
+      start_period: 10s
+    deploy:
+      replicas: ${API_REPLICAS:-2}
+      resources:
+        limits: {cpus: "1.0", memory: 256M}
+
+  gateway:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      api: {condition: service_healthy}
+    ports: ["${GATEWAY_PORT:-8000}:80"]
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=7d
+      - --web.enable-lifecycle
+    ports: ["9090:9090"]
+    volumes:
+      - ./observability/prometheus:/etc/prometheus:ro
+
+  grafana:
+    image: grafana/grafana:11.2.0
+    restart: unless-stopped
+    depends_on: [prometheus]
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/shopflow.json
+    ports: ["3000:3000"]
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro

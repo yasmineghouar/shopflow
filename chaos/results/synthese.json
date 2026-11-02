@@ -1,0 +1,1043 @@
+{
+ "E1_avant": {
+  "experience": "E1",
+  "titre": "30 % d'erreurs sur le service stock",
+  "hypothese": "Le retry absorbe les erreurs transitoires : SLI > 99 %, aucune erreur visible.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 25.02,
+  "t_fin": 45.03,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 793,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 560,
+    "sli": 77.14,
+    "succes_2xx": 77.14,
+    "degrade": 0.0,
+    "utile": 77.14,
+    "erreurs_5xx": 128,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1060,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.16
+ },
+ "E1_apres": {
+  "experience": "E1",
+  "titre": "30 % d'erreurs sur le service stock",
+  "hypothese": "Le retry absorbe les erreurs transitoires : SLI > 99 %, aucune erreur visible.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.05,
+  "t_fin": 55.06,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 793,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 956,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 2.4,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.14,
+    "p95": 0.281,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1085,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.17
+ },
+ "E2_avant": {
+  "experience": "E2",
+  "titre": "Service stock totalement indisponible (20 s)",
+  "hypothese": "Le circuit s'ouvre en < 2 s ; le cache sert la dernière valeur : SLI > 95 %.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 25.02,
+  "t_fin": 45.03,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 794,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 841,
+    "sli": 18.55,
+    "succes_2xx": 18.55,
+    "degrade": 0.0,
+    "utile": 18.55,
+    "erreurs_5xx": 685,
+    "erreurs_reseau": 0,
+    "p50": 0.078,
+    "p95": 0.125,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1056,
+    "sli": 99.91,
+    "succes_2xx": 99.91,
+    "degrade": 0.0,
+    "utile": 99.91,
+    "erreurs_5xx": 1,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.17
+ },
+ "E2_apres": {
+  "experience": "E2",
+  "titre": "Service stock totalement indisponible (20 s)",
+  "hypothese": "Le circuit s'ouvre en < 2 s ; le cache sert la dernière valeur : SLI > 95 %.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.06,
+  "t_fin": 55.08,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 797,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1302,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 85.3,
+    "utile": 96.08,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.078,
+    "p95": 0.11,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1100,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 12.7,
+    "utile": 99.45,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 0.5,
+  "recuperation_s": 5.08
+ },
+ "E3_avant": {
+  "experience": "E3",
+  "titre": "Latence de 2 s sur le service stock",
+  "hypothese": "Timeout + breaker coupent la latence : p95 < 1 s et SLI > 95 %.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 25.02,
+  "t_fin": 45.05,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 793,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 63,
+    "sli": 17.46,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 17.46,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 1.781,
+    "p95": 2.906,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1000,
+    "sli": 98.9,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 98.9,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 1.48
+ },
+ "E3_apres": {
+  "experience": "E3",
+  "titre": "Latence de 2 s sur le service stock",
+  "hypothese": "Timeout + breaker coupent la latence : p95 < 1 s et SLI > 95 %.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.03,
+  "t_retour": 35.06,
+  "t_fin": 55.09,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 797,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1218,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 85.1,
+    "utile": 97.37,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.078,
+    "p95": 0.11,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1096,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 12.2,
+    "utile": 99.73,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 1.83,
+  "recuperation_s": 2.63
+ },
+ "E4_avant": {
+  "experience": "E4",
+  "titre": "Recommandations lentes (3 s)",
+  "hypothese": "La page produit est servie sans recommandations : SLI > 99 %.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 25.03,
+  "t_fin": 45.05,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 789,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 39,
+    "sli": 25.64,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 25.64,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 2.953,
+    "p95": 4.141,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 998,
+    "sli": 98.8,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 98.8,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.91
+ },
+ "E4_apres": {
+  "experience": "E4",
+  "titre": "Recommandations lentes (3 s)",
+  "hypothese": "La page produit est servie sans recommandations : SLI > 99 %.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.03,
+  "t_retour": 35.08,
+  "t_fin": 55.09,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 795,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1216,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 85.4,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.078,
+    "p95": 0.312,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1091,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 14.2,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 2.33,
+  "recuperation_s": 3.13
+ },
+ "E5_avant": {
+  "experience": "E5",
+  "titre": "Paiement : 30 % de réponses perdues après débit",
+  "hypothese": "Retry + clé d'idempotence : aucun double débit, > 99 % des paniers payés.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 35.05,
+  "t_fin": 55.06,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 786,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1018,
+    "sli": 96.37,
+    "succes_2xx": 96.37,
+    "degrade": 0.0,
+    "utile": 96.37,
+    "erreurs_5xx": 37,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1081,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.19,
+  "paiement": {
+   "paniers": 396,
+   "paniers_payes_vus_client": 394,
+   "debits": 431,
+   "debits_en_trop": 37,
+   "taux_paniers_payes": 99.49
+  }
+ },
+ "E5_apres": {
+  "experience": "E5",
+  "titre": "Paiement : 30 % de réponses perdues après débit",
+  "hypothese": "Retry + clé d'idempotence : aucun double débit, > 99 % des paniers payés.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.05,
+  "t_fin": 55.06,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 785,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1058,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1081,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.16,
+  "paiement": {
+   "paniers": 458,
+   "paniers_payes_vus_client": 458,
+   "debits": 458,
+   "debits_en_trop": 0,
+   "taux_paniers_payes": 100.0
+  }
+ },
+ "E6_avant": {
+  "experience": "E6",
+  "titre": "Pic de trafic : client abusif + afflux soudain",
+  "hypothese": "Rate limiting + load shedding : les clients habituels gardent un SLI > 95 % et p95 < 1 s.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.19,
+  "t_fin": 56.02,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 787,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 303,
+    "sli": 99.01,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 99.01,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.703,
+    "p95": 0.766,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1091,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.45,
+  "abusif_codes": {
+   "200": 733
+  },
+  "afflux_codes": {
+   "200": 1534,
+   "201": 188
+  },
+  "checkout_succes_pendant": 100.0,
+  "products_succes_pendant": 100.0
+ },
+ "E6_apres": {
+  "experience": "E6",
+  "titre": "Pic de trafic : client abusif + afflux soudain",
+  "hypothese": "Rate limiting + load shedding : les clients habituels gardent un SLI > 95 % et p95 < 1 s.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 25.17,
+  "t_fin": 45.77,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 805,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 231,
+    "sli": 68.4,
+    "succes_2xx": 69.7,
+    "degrade": 0.0,
+    "utile": 68.4,
+    "erreurs_5xx": 70,
+    "erreurs_reseau": 0,
+    "p50": 0.562,
+    "p95": 0.797,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1093,
+    "sli": 99.82,
+    "succes_2xx": 99.82,
+    "degrade": 0.0,
+    "utile": 99.82,
+    "erreurs_5xx": 2,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.58,
+  "abusif_codes": {
+   "200": 174,
+   "429": 1455,
+   "503": 76
+  },
+  "afflux_codes": {
+   "200": 804,
+   "201": 134,
+   "503": 376
+  },
+  "checkout_succes_pendant": 100.0,
+  "products_succes_pendant": 66.7
+ },
+ "E7_avant": {
+  "experience": "E7",
+  "titre": "Arrêt brutal (kill -9) d'une réplica de l'API",
+  "hypothese": "Le gateway bascule sur l'autre réplica ; < 1 % d'échecs ; redémarrage auto < 15 s.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 1,
+  "t_panne": 15.02,
+  "t_retour": 35.42,
+  "t_fin": 55.52,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 795,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1065,
+    "sli": 94.37,
+    "succes_2xx": 94.37,
+    "degrade": 0.0,
+    "utile": 94.37,
+    "erreurs_5xx": 60,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1053,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.17,
+  "conteneur": "6d8d0f4f442a",
+  "redemarrage_s": 20.5,
+  "echecs_pendant_kill": 60
+ },
+ "E7_apres": {
+  "experience": "E7",
+  "titre": "Arrêt brutal (kill -9) d'une réplica de l'API",
+  "hypothese": "Le gateway bascule sur l'autre réplica ; < 1 % d'échecs ; redémarrage auto < 15 s.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.41,
+  "t_fin": 55.5,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 792,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1089,
+    "sli": 99.82,
+    "succes_2xx": 99.82,
+    "degrade": 0.0,
+    "utile": 99.82,
+    "erreurs_5xx": 2,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1072,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.2,
+  "conteneur": "0ed2536b7c70",
+  "redemarrage_s": 20.5,
+  "echecs_pendant_kill": 2
+ },
+ "E3_apres_v1": {
+  "experience": "E3",
+  "titre": "Latence de 2 s sur le service stock",
+  "hypothese": "Timeout + breaker coupent la latence : p95 < 1 s et SLI > 95 %.",
+  "mode": "apres",
+  "tag": "v1",
+  "replicas": 2,
+  "t_panne": 15.02,
+  "t_retour": 35.06,
+  "t_fin": 55.06,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 789,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1101,
+    "sli": 97.82,
+    "succes_2xx": 100.0,
+    "degrade": 85.7,
+    "utile": 94.91,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.078,
+    "p95": 0.11,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1118,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 23.3,
+    "utile": 99.46,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.11,
+    "p95": 0.157,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 3.14,
+  "recuperation_s": 4.81
+ },
+ "E6_apres_v1": {
+  "experience": "E6",
+  "titre": "Pic de trafic : client abusif + afflux soudain",
+  "hypothese": "Rate limiting + load shedding : les clients habituels gardent un SLI > 95 % et p95 < 1 s.",
+  "mode": "apres",
+  "tag": "v1",
+  "replicas": 2,
+  "t_panne": 15.03,
+  "t_retour": 25.16,
+  "t_fin": 45.58,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 803,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 309,
+    "sli": 51.78,
+    "succes_2xx": 51.78,
+    "degrade": 0.6,
+    "utile": 51.78,
+    "erreurs_5xx": 149,
+    "erreurs_reseau": 0,
+    "p50": 0.359,
+    "p95": 0.485,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1096,
+    "sli": 99.18,
+    "succes_2xx": 99.18,
+    "degrade": 0.0,
+    "utile": 99.18,
+    "erreurs_5xx": 9,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 0.41,
+  "abusif_codes": {
+   "200": 116,
+   "429": 855,
+   "503": 134
+  },
+  "afflux_codes": {
+   "200": 757,
+   "201": 210,
+   "503": 1023
+  },
+  "checkout_succes_pendant": 100.0,
+  "products_succes_pendant": 42.3
+ },
+ "E1_apres_cb1": {
+  "experience": "E1",
+  "titre": "30 % d'erreurs sur le service stock",
+  "hypothese": "Le retry absorbe les erreurs transitoires : SLI > 99 %, aucune erreur visible.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 35.05,
+  "t_fin": 55.06,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 794,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1186,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 62.6,
+    "utile": 98.82,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.094,
+    "p95": 0.203,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1082,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 5.6,
+    "utile": 99.91,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 1.02,
+  "recuperation_s": 2.78
+ },
+ "E1_avant_gw1": {
+  "experience": "E1",
+  "titre": "30 % d'erreurs sur le service stock",
+  "hypothese": "Le retry absorbe les erreurs transitoires : SLI > 99 %, aucune erreur visible.",
+  "mode": "avant",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 25.02,
+  "t_fin": 45.05,
+  "arret_securite": true,
+  "bilans": {
+   "reference": {
+    "n": 792,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 593,
+    "sli": 7.08,
+    "succes_2xx": 7.08,
+    "degrade": 0.0,
+    "utile": 7.08,
+    "erreurs_5xx": 551,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1081,
+    "sli": 91.3,
+    "succes_2xx": 91.3,
+    "degrade": 0.0,
+    "utile": 91.3,
+    "erreurs_5xx": 94,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": null,
+  "recuperation_s": 1.59
+ },
+ "E3_apres_cb1": {
+  "experience": "E3",
+  "titre": "Latence de 2 s sur le service stock",
+  "hypothese": "Timeout + breaker coupent la latence : p95 < 1 s et SLI > 95 %.",
+  "mode": "apres",
+  "tag": "",
+  "replicas": 2,
+  "t_panne": 15.0,
+  "t_retour": 35.05,
+  "t_fin": 55.09,
+  "arret_securite": false,
+  "bilans": {
+   "reference": {
+    "n": 782,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 0.0,
+    "utile": 100.0,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   },
+   "panne": {
+    "n": 1220,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 84.3,
+    "utile": 95.49,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.093,
+    "p95": 0.125,
+    "debit_bon_par_s": null
+   },
+   "recuperation": {
+    "n": 1070,
+    "sli": 100.0,
+    "succes_2xx": 100.0,
+    "degrade": 7.2,
+    "utile": 99.72,
+    "erreurs_5xx": 0,
+    "erreurs_reseau": 0,
+    "p50": 0.125,
+    "p95": 0.172,
+    "debit_bon_par_s": null
+   }
+  },
+  "detection_s": 0.84,
+  "recuperation_s": 1.75
+ }
+}

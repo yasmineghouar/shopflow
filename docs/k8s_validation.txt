@@ -1,0 +1,11 @@
+k8s/00-namespace.yaml passed for resource namespace/shopflow against version 1.30
+k8s/api-configmap.yaml passed for resource configmap/shopflow-api-config against version 1.30
+k8s/api-deployment.yaml passed for resource deployment/shopflow-api against version 1.30
+k8s/api-pdb.yaml passed for resource poddisruptionbudget/shopflow-api-pdb against version 1.30
+k8s/api-service.yaml passed for resource service/shopflow-api against version 1.30
+k8s/dependances.yaml passed for resource deployment/stock against version 1.30
+k8s/dependances.yaml passed for resource service/stock against version 1.30
+k8s/dependances.yaml passed for resource deployment/reco against version 1.30
+k8s/dependances.yaml passed for resource service/reco against version 1.30
+k8s/dependances.yaml passed for resource deployment/payment against version 1.30
+k8s/dependances.yaml passed for resource service/payment against version 1.30

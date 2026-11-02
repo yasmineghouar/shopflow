@@ -1,0 +1,10 @@
+23:23:38 stock DOWN (patterns OFF) pendant 150 s
+23:23:58   t+   20 s  alerte ShopFlowSLOBurnRateLent  -> pending
+23:24:08   t+   30 s  alerte ShopFlowSLOBurnRateRapide  -> pending
+23:25:08   t+   90 s  alerte ShopFlowSLOBurnRateRapide  -> firing
+23:26:38 stock DOWN (patterns ON) pendant 150 s
+23:26:43   t+    5 s  alerte ShopFlowSLOBurnRateRapide  -> firing
+23:26:43   t+    5 s  alerte ShopFlowSLOBurnRateLent  -> pending
+23:26:48   t+   10 s  alerte ShopFlowCircuitOuvert stock -> pending
+23:27:13   t+   35 s  alerte ShopFlowCircuitOuvert stock -> firing
+23:28:53   t+  135 s  alerte ShopFlowSLOBurnRateLent  -> firing

@@ -1,0 +1,123 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock
+  namespace: shopflow
+  labels: {app: stock}
+spec:
+  replicas: 1                   # dépendance volontairement instable (simulée), non répliquée
+  selector:
+    matchLabels: {app: stock}
+  template:
+    metadata:
+      labels: {app: stock}
+    spec:
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: stock
+          image: shopflow-deps:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8080}
+          resources:
+            requests: {cpu: 50m, memory: 32Mi}
+            limits: {cpu: 250m, memory: 128Mi}
+          readinessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock
+  namespace: shopflow
+spec:
+  selector: {app: stock}
+  ports:
+    - {name: http, port: 8080, targetPort: http}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reco
+  namespace: shopflow
+  labels: {app: reco}
+spec:
+  replicas: 1                   # dépendance volontairement instable (simulée), non répliquée
+  selector:
+    matchLabels: {app: reco}
+  template:
+    metadata:
+      labels: {app: reco}
+    spec:
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: reco
+          image: shopflow-deps:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8080}
+          resources:
+            requests: {cpu: 50m, memory: 32Mi}
+            limits: {cpu: 250m, memory: 128Mi}
+          readinessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: reco
+  namespace: shopflow
+spec:
+  selector: {app: reco}
+  ports:
+    - {name: http, port: 8080, targetPort: http}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment
+  namespace: shopflow
+  labels: {app: payment}
+spec:
+  replicas: 1                   # dépendance volontairement instable (simulée), non répliquée
+  selector:
+    matchLabels: {app: payment}
+  template:
+    metadata:
+      labels: {app: payment}
+    spec:
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: payment
+          image: shopflow-deps:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8080}
+          resources:
+            requests: {cpu: 50m, memory: 32Mi}
+            limits: {cpu: 250m, memory: 128Mi}
+          readinessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /health, port: http}
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment
+  namespace: shopflow
+spec:
+  selector: {app: payment}
+  ports:
+    - {name: http, port: 8080, targetPort: http}

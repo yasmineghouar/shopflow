@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shopflow-api-config
+  namespace: shopflow
+data:
+  PATTERNS: "on"
+  STOCK_URL: http://stock:8080
+  RECO_URL: http://reco:8080
+  PAYMENT_URL: http://payment:8080
+  TIMEOUT_STOCK: "0.3"
+  DEADLINE_STOCK: "0.8"
+  LS_MAX_EN_COURS: "40"
+  CB_FENETRE: "50"
+  CB_SEUIL: "0.6"
+  CB_VOLUME_MIN: "20"

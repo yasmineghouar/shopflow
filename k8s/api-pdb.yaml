@@ -1,0 +1,9 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: shopflow-api-pdb
+  namespace: shopflow
+spec:
+  minAvailable: 2               # un drain de nœud ne peut évincer qu'un pod API à la fois
+  selector:
+    matchLabels: {app: shopflow-api}

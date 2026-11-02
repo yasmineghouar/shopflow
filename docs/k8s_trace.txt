@@ -1,0 +1,20 @@
+$ minikube start -p shopflow ; minikube image load shopflow-api:latest shopflow-deps:latest
+$ kubectl apply -f k8s/          # 11 ressources créées (validées aussi : kubernetes-validate 1.30 --strict)
+$ kubectl -n shopflow rollout status deploy/shopflow-api
+deployment "shopflow-api" successfully rolled out      # 3/3 pods prêts (startup + readiness OK)
+
+# Test 1 — suppression d'un pod pendant une boucle de requêtes (45 s, pod client dans le cluster)
+23:44:19 kubectl delete pod shopflow-api-...-bvq4d
+23:44:22 ...-8ngjs 0/1 Running ; ...-bvq4d 0/1 Terminating (readiness en échec, drain) ; 2 autres 1/1
+23:44:25 ...-8ngjs 1/1 Running  -> remplaçant prêt en ~6 s
+RESULTAT {200: 258}                                    # 0 requête en échec
+
+# Test 2 — rolling update (kubectl set env deploy/shopflow-api VERSION=2) pendant la boucle
+23:45:16 -> 23:45:33  deployment "shopflow-api" successfully rolled out   (maxUnavailable: 0)
+RESULTAT {200: 342}                                    # 0 requête en échec
+
+# Test 3 — maintenance de nœud : kubectl drain shopflow (PDB minAvailable: 2, ALLOWED DISRUPTIONS = 1)
+evicting pod shopflow-api-...-j596z                    # 1er pod évincé
+error when evicting pods/"shopflow-api-...-qgrvg": Cannot evict pod as it would violate the pod's disruption budget.
+error when evicting pods/"shopflow-api-...-rq7fx": Cannot evict pod as it would violate the pod's disruption budget.
+=> 2 pods restent en service ; kubectl uncordon shopflow -> 3/3 Running

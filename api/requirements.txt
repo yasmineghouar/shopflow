@@ -1,0 +1,2 @@
+# Aucune dépendance externe : bibliothèque standard Python uniquement
+# (serveur HTTP, métriques Prometheus et patterns de résilience écrits à la main).
